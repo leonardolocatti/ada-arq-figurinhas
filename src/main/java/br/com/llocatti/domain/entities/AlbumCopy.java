@@ -32,4 +32,8 @@ public class AlbumCopy {
   public Set<Sticker> getStickers() {
     return this.stickers;
   }
+
+  public void removeSticker(Sticker sticker) {
+    this.stickers.remove(sticker);
+  }
 }
