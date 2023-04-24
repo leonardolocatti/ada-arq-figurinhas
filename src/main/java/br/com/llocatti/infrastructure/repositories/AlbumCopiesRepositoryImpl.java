@@ -137,4 +137,9 @@ public class AlbumCopiesRepositoryImpl implements AlbumCopiesRepository {
     return Optional.of(
         new AlbumCopy(UUID.fromString(albumCopyDocument.getId()), albumBuilder.build(), stickers));
   }
+
+  @Override
+  public void delete(UUID id) {
+    this.albumCopiesRepository.deleteById(id.toString());
+  }
 }

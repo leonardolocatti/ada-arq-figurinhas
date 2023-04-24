@@ -11,4 +11,6 @@ public interface AlbumCopiesRepository {
   Set<AlbumCopy> findAll();
 
   Optional<AlbumCopy> findById(UUID id);
+
+  void delete(UUID id);
 }

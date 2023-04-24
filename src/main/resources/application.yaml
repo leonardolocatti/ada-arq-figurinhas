@@ -2,3 +2,6 @@ spring:
   data:
   mongodb:
     uri: mongodb://localhost:27017/
+  kafka:
+    bootstrap-servers: localhost:9092
+    group-id: sticker-album

@@ -9,6 +9,8 @@ import br.com.llocatti.domain.repositories.AlbumCopiesRepository;
 import br.com.llocatti.domain.repositories.AlbumsRepository;
 import java.util.Collections;
 import java.util.Optional;
+
+import br.com.llocatti.domain.repositories.EventsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,12 +22,14 @@ public class CreateAlbumCopyUseCaseImpl implements CreateAlbumCopyUseCase {
   private final Logger logger;
   private final AlbumsRepository albumsRepository;
   private final AlbumCopiesRepository albumCopiesRepository;
+  private final EventsRepository eventsRepository;
 
   public CreateAlbumCopyUseCaseImpl(
-      AlbumsRepository albumsRepository, AlbumCopiesRepository albumCopiesRepository) {
+      AlbumsRepository albumsRepository, AlbumCopiesRepository albumCopiesRepository, EventsRepository eventsRepository) {
     this.logger = LoggerFactory.getLogger(this.getClass());
     this.albumsRepository = albumsRepository;
     this.albumCopiesRepository = albumCopiesRepository;
+    this.eventsRepository = eventsRepository;
   }
 
   @Override
@@ -48,6 +52,8 @@ public class CreateAlbumCopyUseCaseImpl implements CreateAlbumCopyUseCase {
     this.logger.info("Saving album copy");
 
     this.albumCopiesRepository.save(albumCopy);
+
+    this.eventsRepository.publishCreatedAlbumEvent(albumCopy);
 
     return new AlbumCopyResponse(
         albumCopy.getId(), albumCopy.getAlbum().getName(), Collections.emptySet());

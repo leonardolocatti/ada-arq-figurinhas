@@ -11,6 +11,9 @@ public class AlbumCopyDocument {
   @DBRef private AlbumDocument album;
   @DBRef private List<StickerDocument> stickers;
 
+  public AlbumCopyDocument() {
+  }
+
   public AlbumCopyDocument(String id, AlbumDocument album, List<StickerDocument> stickers) {
     this.id = id;
     this.album = album;
